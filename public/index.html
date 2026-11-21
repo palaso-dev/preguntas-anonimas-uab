@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Confesiones | Cena de Gala Navideña</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/gala.css" />
+  </head>
+  <body class="ngl-body">
+    <a href="#main-content" class="skip-link visually-hidden">Ir al formulario</a>
+
+    <div id="snow-layer" class="snow-layer" aria-hidden="true"></div>
+
+    <div class="christmas-lights" aria-hidden="true">
+      <span class="light-bulb light-bulb--red"></span>
+      <span class="light-bulb light-bulb--teal"></span>
+      <span class="light-bulb light-bulb--snow"></span>
+      <span class="light-bulb light-bulb--red"></span>
+      <span class="light-bulb light-bulb--teal"></span>
+      <span class="light-bulb light-bulb--snow"></span>
+      <span class="light-bulb light-bulb--red"></span>
+      <span class="light-bulb light-bulb--teal"></span>
+      <span class="light-bulb light-bulb--snow"></span>
+      <span class="light-bulb light-bulb--red"></span>
+    </div>
+
+    <main class="ngl-main">
+      <div id="paused-banner" class="banner banner--warning" hidden role="status">
+        <p>
+          <strong>Buzón en pausa.</strong> Están leyendo confesiones en vivo en este momento.
+        </p>
+      </div>
+
+      <div id="submit-alert" class="banner banner--warning" role="alert" hidden>
+        <p id="submit-alert-text"></p>
+      </div>
+
+      <section id="guest-stage" class="ngl-stage" aria-labelledby="main-content">
+        <form id="confession-form" novalidate>
+          <div class="ngl-card">
+            <div class="ngl-card-top">
+              <div class="ngl-avatar">
+                <img src="/img/uab-logo.png" alt="Logo UAB" class="ngl-logo" />
+              </div>
+              <div>
+                <h1 id="main-content" class="ngl-card-title" tabindex="-1">
+                  Confesiones Anónimas
+                </h1>
+                <p id="event-subtitle" class="ngl-card-prompt" hidden></p>
+              </div>
+            </div>
+
+            <div class="ngl-card-body">
+              <label for="message-input" class="visually-hidden">Tu confesión</label>
+              <textarea
+                id="message-input"
+                name="message"
+                class="ngl-textarea"
+                required
+                minlength="5"
+                maxlength="320"
+                placeholder="Escribe tu confesión aquí..."
+                data-error="message-error"
+              ></textarea>
+              <div id="message-error" class="error-msg">
+                <span class="error-badge" role="img" aria-label="Error">!</span>
+                <span>Escribe entre 5 y 320 caracteres.</span>
+              </div>
+              <div style="display: flex; justify-content: flex-end">
+                <span id="word-counter" style="font-size: 0.78rem; font-weight: 600; color: rgba(255, 255, 255, 0.78); font-variant-numeric: tabular-nums" aria-live="off">
+                  0 / 320
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1rem">
+            <button id="submit-btn" type="submit" class="ngl-submit-btn">
+              Enviar
+            </button>
+          </div>
+        </form>
+
+        <div id="guest-success-panel" class="ngl-sent-card" hidden>
+          <div class="ngl-sent-icon" aria-hidden="true">✓</div>
+          <h2 id="success-heading" tabindex="-1" style="font-size: 1.65rem; font-weight: 800">
+            Confesión enviada
+          </h2>
+          <p class="brand-subtitle" style="max-width: 28ch">
+            Ya llegó al buzón de la gala.
+          </p>
+          <button id="send-another-btn" type="button" class="ngl-submit-btn">
+            Enviar otra confesión
+          </button>
+        </div>
+
+        <div class="ngl-gifts" aria-hidden="true">
+          <svg class="ngl-gift-svg ngl-gift-svg--sm" viewBox="0 0 48 48" fill="none">
+            <rect x="7" y="18" width="34" height="24" rx="4" fill="#0f766e" />
+            <rect x="5" y="13" width="38" height="7" rx="3" fill="#2dd4bf" />
+            <rect x="21" y="13" width="6" height="29" fill="#ffffff" />
+            <path d="M24 13C24 8 17 6 15 9.5C13.5 12.2 18 13 24 13Z" fill="#ffffff" />
+            <path d="M24 13C24 8 31 6 33 9.5C34.5 12.2 30 13 24 13Z" fill="#ffffff" />
+          </svg>
+          <svg class="ngl-gift-svg" viewBox="0 0 48 48" fill="none">
+            <rect x="6" y="18" width="36" height="24" rx="4" fill="#c41e3a" />
+            <rect x="4" y="12" width="40" height="8" rx="3" fill="#e12d4b" />
+            <rect x="21" y="12" width="6" height="30" fill="#2dd4bf" />
+            <path d="M24 12C24 7 16.5 5 14.5 8.5C13 11.2 18 12 24 12Z" fill="#5eead4" />
+            <path d="M24 12C24 7 31.5 5 33.5 8.5C35 11.2 30 12 24 12Z" fill="#5eead4" />
+          </svg>
+          <svg class="ngl-gift-svg ngl-gift-svg--sm" viewBox="0 0 48 48" fill="none">
+            <rect x="7" y="18" width="34" height="24" rx="4" fill="#14325c" />
+            <rect x="5" y="13" width="38" height="7" rx="3" fill="#3b6ea1" />
+            <rect x="21" y="13" width="6" height="29" fill="#ff94a5" />
+            <path d="M24 13C24 8 17 6 15 9.5C13.5 12.2 18 13 24 13Z" fill="#ff94a5" />
+            <path d="M24 13C24 8 31 6 33 9.5C34.5 12.2 30 13 24 13Z" fill="#ff94a5" />
+          </svg>
+        </div>
+      </section>
+    </main>
+
+    <div role="region" aria-label="Notificaciones" class="toast-region"></div>
+    <script type="module" src="/js/guest.mjs"></script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Código QR Imprimible | Confesiones Anónimas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/gala.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link visually-hidden">Ir a la tarjeta QR</a>
+
+    <header class="gala-shell no-print" style="padding-bottom: 0">
+      <div class="banner" style="justify-content: space-between">
+        <div>
+          <strong style="font-size: 1.02rem">Tarjeta QR lista para mesas o proyector</strong>
+          <p class="hint">Puedes imprimirla ahora mismo o descargar el QR en alta resolución.</p>
+        </div>
+        <nav class="nav-links" aria-label="Herramientas de tarjeta QR">
+          <button id="print-qr-btn" type="button" class="btn btn--turquoise btn--sm">
+            Imprimir / Guardar PDF
+          </button>
+          <a id="qr-download-png" class="btn btn--primary btn--sm" href="#png" download="qr-confesiones.png">
+            Descargar PNG
+          </a>
+          <a id="qr-download-svg" class="btn btn--ghost btn--sm" href="#svg" download="qr-confesiones.svg">
+            Descargar SVG
+          </a>
+          <a class="btn btn--ghost btn--sm" href="./admin.html">Ir a control</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <article class="qr-print-sheet" aria-labelledby="main-content">
+        <div class="brand-emblem" style="width: 4rem; height: 4rem; padding: 0.35rem">
+          <img src="./img/uab-logo.png" alt="Logo UAB" class="brand-logo" />
+        </div>
+        <div>
+          <h1 id="main-content" tabindex="-1" style="font-size: clamp(2rem, 4.5vw, 2.8rem); font-weight: 800">
+            Confesiones Anónimas
+          </h1>
+          <p id="qr-subtitle" class="brand-subtitle" style="font-size: 1.1rem; margin-top: 0.4rem" hidden></p>
+        </div>
+
+        <div class="qr-print-frame">
+          <img id="printable-qr-img" alt="Código QR para enviar confesiones anónimas" width="320" height="320" />
+        </div>
+
+        <div style="display: grid; gap: 0.5rem; max-width: 34ch">
+          <h2 style="font-size: 1.35rem; font-weight: 800">Escanea para enviar tu confesión</h2>
+          <p id="qr-active-url" style="font-size: 0.9rem; font-weight: 700; color: var(--turquoise-300); overflow-wrap: anywhere"></p>
+        </div>
+      </article>
+    </main>
+
+    <script type="module" src="./js/qr.mjs"></script>
+  </body>
+</html>

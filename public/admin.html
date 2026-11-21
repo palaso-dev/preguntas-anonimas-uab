@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Control de Confesiones | Cena de Gala Navideña</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/gala.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link visually-hidden">Ir al contenido principal</a>
+
+    <div class="gala-shell">
+      <header class="gala-header">
+        <div class="brand-lockup">
+          <div class="brand-emblem">
+            <img src="/img/uab-logo.png" alt="Logo UAB" class="brand-logo" />
+          </div>
+          <div>
+            <h1 id="main-content" class="brand-heading" tabindex="-1">Confesiones Anónimas</h1>
+            <p id="admin-subtitle" class="brand-subtitle">Control de confesiones y pantalla en vivo</p>
+          </div>
+        </div>
+
+        <nav class="nav-links" aria-label="Accesos de la gala">
+          <span id="sse-badge" class="badge">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="sse-status-text">Conectando...</span>
+          </span>
+          <a class="btn btn--ghost btn--sm" href="/" target="_blank" rel="noopener">Formulario QR</a>
+          <a class="btn btn--ghost btn--sm" href="/live" target="_blank" rel="noopener">Pantalla /live</a>
+          <a class="btn btn--ghost btn--sm" href="/presentadores" target="_blank" rel="noopener">Presentadores</a>
+          <a class="btn btn--ghost btn--sm" href="/qr" target="_blank" rel="noopener">Tarjeta QR</a>
+          <button id="open-settings-btn" type="button" class="btn btn--ghost btn--sm" hidden>Ajustes</button>
+          <button id="logout-btn" type="button" class="btn btn--ghost btn--sm" hidden>Salir</button>
+        </nav>
+      </header>
+
+      <main>
+        <section id="login-section" class="card" style="max-width: 26rem; margin: 2rem auto" aria-labelledby="login-heading">
+          <h2 id="login-heading" style="font-size: 1.55rem; font-weight: 800; margin-bottom: 0.4rem">
+            Control de Confesiones
+          </h2>
+          <p class="hint" style="margin-bottom: 1.25rem">
+            Ingresa el PIN para ver y controlar las confesiones que llegan.
+          </p>
+
+          <div id="login-alert" class="banner banner--warning" role="alert" hidden style="margin-bottom: 1rem">
+            <p id="login-alert-text"></p>
+          </div>
+
+          <form id="login-form" novalidate>
+            <div class="field">
+              <label for="pin-input">PIN de acceso</label>
+              <span id="pin-hint" class="hint">PIN inicial por defecto: 2026</span>
+              <input
+                id="pin-input"
+                name="pin"
+                type="password"
+                inputmode="numeric"
+                autocomplete="current-password"
+                class="control"
+                required
+                minlength="4"
+                maxlength="12"
+                aria-describedby="pin-hint"
+                data-error="pin-error"
+              />
+              <div id="pin-error" class="error-msg">
+                <span class="error-badge" role="img" aria-label="Error">!</span>
+                <span>Ingresa un PIN válido de 4 a 12 caracteres.</span>
+              </div>
+            </div>
+            <button id="login-submit-btn" type="submit" class="btn btn--primary btn--lg" style="width: 100%">
+              Entrar
+            </button>
+          </form>
+        </section>
+
+        <div id="dashboard-section" class="admin-grid" hidden>
+          <section class="card" aria-labelledby="controls-heading">
+            <h2 id="controls-heading" class="visually-hidden">Controles en vivo y código QR</h2>
+            <div class="admin-toolbar">
+              <div>
+                <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 0.65rem">
+                  Control de la Gala
+                </h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1rem">
+                  <button id="toggle-submissions-btn" type="button" class="btn btn--turquoise btn--sm">
+                    Buzón abierto
+                  </button>
+                  <button id="toggle-sound-btn" type="button" class="btn btn--ghost btn--sm">
+                    Sonido avisos: Activado
+                  </button>
+                </div>
+
+                <div class="field" style="margin-bottom: 0">
+                  <label for="live-mode-select">Qué mostrar en /live (Proyector)</label>
+                  <select id="live-mode-select" class="control">
+                    <option value="qr">Solo código QR para escanear</option>
+                    <option value="featured">Confesión destacada + QR en esquina</option>
+                    <option value="wall">Muro con las confesiones aprobadas</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 0.65rem">
+                  QR y enlaces
+                </h3>
+                <div class="qr-preview-box">
+                  <div class="qr-frame">
+                    <img id="admin-qr-img" src="/api/qr.svg" alt="Código QR para enviar confesiones" width="112" height="112" />
+                  </div>
+                  <div style="flex: 1 1 16rem; display: grid; gap: 0.65rem">
+                    <form id="url-form" style="display: flex; flex-wrap: wrap; gap: 0.5rem" novalidate>
+                      <label for="public-url-input" class="visually-hidden">URL pública para el QR</label>
+                      <input
+                        id="public-url-input"
+                        type="url"
+                        class="control"
+                        style="flex: 1 1 13rem"
+                        placeholder="https://tu-evento.trycloudflare.com"
+                        data-error="public-url-error"
+                      />
+                      <div id="public-url-error" class="error-msg" style="width: 100%">
+                        <span class="error-badge" role="img" aria-label="Error">!</span>
+                        <span>Ingresa una URL válida que comience con http:// o https://.</span>
+                      </div>
+                      <button type="submit" class="btn btn--teal btn--sm">Guardar URL</button>
+                    </form>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem">
+                      <button id="copy-guest-link-btn" type="button" class="btn btn--ghost btn--sm">
+                        Copiar link invitados
+                      </button>
+                      <button id="copy-presenter-link-btn" type="button" class="btn btn--ghost btn--sm">
+                        Copiar link presentadores
+                      </button>
+                      <a class="btn btn--ghost btn--sm" href="/api/qr.png" download="qr-cena-gala.png">
+                        PNG
+                      </a>
+                      <a class="btn btn--ghost btn--sm" href="/api/qr.svg" download="qr-cena-gala.svg">
+                        SVG
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div id="featured-banner" class="banner banner--featured" hidden>
+            <div>
+              <span class="badge badge--turquoise" style="margin-bottom: 0.4rem">En pantalla ahora</span>
+              <p id="featured-banner-text" style="font-weight: 700"></p>
+            </div>
+            <button id="clear-featured-btn" type="button" class="btn btn--ghost btn--sm">
+              Quitar de pantalla
+            </button>
+          </div>
+
+          <section class="card" aria-labelledby="moderation-heading">
+            <h2 id="moderation-heading" style="font-size: 1.35rem; font-weight: 800; margin-bottom: 1rem">
+              Confesiones que llegaron
+            </h2>
+
+            <div class="tabs-bar" role="tablist" aria-label="Estados de confesiones">
+              <button
+                id="tab-pending"
+                type="button"
+                role="tab"
+                class="tab-btn"
+                data-status="pending"
+                aria-selected="true"
+                tabindex="0"
+              >
+                <span>Nuevas</span>
+                <span id="count-pending" class="tab-count">0</span>
+              </button>
+              <button
+                id="tab-approved"
+                type="button"
+                role="tab"
+                class="tab-btn"
+                data-status="approved"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                <span>Aprobadas</span>
+                <span id="count-approved" class="tab-count">0</span>
+              </button>
+              <button
+                id="tab-read"
+                type="button"
+                role="tab"
+                class="tab-btn"
+                data-status="read"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                <span>Leídas</span>
+                <span id="count-read" class="tab-count">0</span>
+              </button>
+              <button
+                id="tab-rejected"
+                type="button"
+                role="tab"
+                class="tab-btn"
+                data-status="rejected"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                <span>Descartadas</span>
+                <span id="count-rejected" class="tab-count">0</span>
+              </button>
+            </div>
+
+            <div class="filter-row">
+              <div class="control-search">
+                <label for="search-input" class="visually-hidden">Buscar confesiones</label>
+                <input
+                  id="search-input"
+                  type="search"
+                  class="control"
+                  placeholder="Buscar confesión..."
+                />
+              </div>
+            </div>
+
+            <div id="confessions-empty" class="empty-state" hidden>
+              <p id="confessions-empty-text">No hay confesiones en esta bandeja.</p>
+            </div>
+
+            <ul id="confessions-list" class="confession-list"></ul>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <dialog id="edit-dialog" aria-labelledby="edit-dialog-title" closedby="closerequest">
+      <div class="dialog-inner">
+        <div class="dialog-header">
+          <h2 id="edit-dialog-title" class="dialog-title">Editar confesión</h2>
+          <button type="button" class="btn btn--ghost btn--sm" data-close-dialog aria-label="Cerrar ventana de edición">
+            Cerrar
+          </button>
+        </div>
+        <form id="edit-form" novalidate>
+          <div class="field">
+            <label for="edit-message">Confesión</label>
+            <textarea
+              id="edit-message"
+              class="control auto-grow"
+              required
+              minlength="5"
+              maxlength="320"
+              autofocus
+              data-error="edit-message-error"
+            ></textarea>
+            <div id="edit-message-error" class="error-msg">
+              <span class="error-badge" role="img" aria-label="Error">!</span>
+              <span>El mensaje debe tener entre 5 y 320 caracteres.</span>
+            </div>
+          </div>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn--ghost" data-close-dialog>Cancelar</button>
+            <button type="submit" class="btn btn--turquoise">Guardar cambios</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <dialog id="settings-dialog" aria-labelledby="settings-dialog-title" closedby="closerequest">
+      <div class="dialog-inner">
+        <div class="dialog-header">
+          <h2 id="settings-dialog-title" class="dialog-title">Ajustes de la Gala</h2>
+          <button type="button" class="btn btn--ghost btn--sm" data-close-dialog aria-label="Cerrar ajustes">
+            Cerrar
+          </button>
+        </div>
+        <form id="settings-form" novalidate>
+          <div class="field">
+            <label for="setting-title">Título del evento</label>
+            <input
+              id="setting-title"
+              type="text"
+              class="control"
+              required
+              minlength="2"
+              maxlength="80"
+              autofocus
+              data-error="setting-title-error"
+            />
+            <div id="setting-title-error" class="error-msg">
+              <span class="error-badge" role="img" aria-label="Error">!</span>
+              <span>El título debe tener entre 2 y 80 caracteres.</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="setting-subtitle">Frase de invitación</label>
+            <input id="setting-subtitle" type="text" class="control" maxlength="100" />
+          </div>
+          <div class="field">
+            <label for="setting-new-pin">Nuevo PIN de acceso (opcional)</label>
+            <span id="setting-pin-hint" class="hint">Déjalo vacío para mantener el PIN actual (4 a 12 caracteres).</span>
+            <input
+              id="setting-new-pin"
+              type="password"
+              class="control"
+              minlength="4"
+              maxlength="12"
+              autocomplete="new-password"
+              aria-describedby="setting-pin-hint"
+              data-error="setting-pin-error"
+            />
+            <div id="setting-pin-error" class="error-msg">
+              <span class="error-badge" role="img" aria-label="Error">!</span>
+              <span>El nuevo PIN debe tener entre 4 y 12 caracteres.</span>
+            </div>
+          </div>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn--ghost" data-close-dialog>Cancelar</button>
+            <button type="submit" class="btn btn--turquoise">Guardar ajustes</button>
+          </div>
+        </form>
+
+        <hr style="width: 100%; border: 0; border-top: 1px solid var(--border-subtle); margin: 0.25rem 0" />
+
+        <div style="display: grid; gap: 0.65rem">
+          <h3 style="font-size: 1rem">Respaldo y limpieza</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem">
+            <a class="btn btn--ghost btn--sm" href="/api/admin/export?format=csv" download="confesiones-gala.csv">
+              Exportar CSV (Excel)
+            </a>
+            <a class="btn btn--ghost btn--sm" href="/api/admin/export?format=json" download="confesiones-gala.json">
+              Exportar JSON
+            </a>
+            <button id="clear-all-btn" type="button" class="btn btn--danger btn--sm">
+              Vaciar todas las confesiones
+            </button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="confirm-dialog" aria-labelledby="confirm-dialog-title" closedby="any">
+      <div class="dialog-inner">
+        <h2 id="confirm-dialog-title" class="dialog-title">Confirmar acción</h2>
+        <p id="confirm-dialog-message" class="brand-subtitle"></p>
+        <div class="dialog-actions">
+          <button id="confirm-danger-btn" type="button" class="btn btn--danger">Confirmar</button>
+          <button id="confirm-cancel-btn" type="button" class="btn btn--ghost" data-close-dialog autofocus>
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <div role="region" aria-label="Notificaciones" class="toast-region"></div>
+    <script type="module" src="/js/admin.mjs"></script>
+  </body>
+</html>

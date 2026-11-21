@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Presentadores | Cena de Gala Navideña</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/gala.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link visually-hidden">Ir al contenido principal</a>
+
+    <div class="gala-shell">
+      <header class="gala-header">
+        <div class="brand-lockup">
+          <div class="brand-emblem">
+            <img src="/img/uab-logo.png" alt="Logo UAB" class="brand-logo" />
+          </div>
+          <div>
+            <h1 id="main-content" class="brand-heading" tabindex="-1">Confesiones Anónimas</h1>
+            <p id="presenter-subtitle" class="brand-subtitle">Confesiones listas para leer</p>
+          </div>
+        </div>
+
+        <div class="nav-links">
+          <span id="presenter-sse-badge" class="badge">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="presenter-sse-text">Conectando...</span>
+          </span>
+          <span id="unread-badge" class="badge badge--turquoise" hidden>0 por leer</span>
+        </div>
+      </header>
+
+      <main>
+        <section id="presenter-login-section" class="card" style="max-width: 26rem; margin: 2rem auto" aria-labelledby="presenter-login-heading">
+          <h2 id="presenter-login-heading" style="font-size: 1.55rem; font-weight: 800; margin-bottom: 0.4rem">
+            Acceso Presentadores
+          </h2>
+          <p class="hint" style="margin-bottom: 1.25rem">
+            Si abriste el enlace mágico entrarás directo. También puedes ingresar con el PIN del evento.
+          </p>
+
+          <div id="presenter-login-alert" class="banner banner--warning" role="alert" hidden style="margin-bottom: 1rem">
+            <p id="presenter-login-alert-text"></p>
+          </div>
+
+          <form id="presenter-login-form" novalidate>
+            <div class="field">
+              <label for="presenter-pin-input">PIN del evento</label>
+              <span id="presenter-pin-hint" class="hint">Solicita el PIN al encargado de control.</span>
+              <input
+                id="presenter-pin-input"
+                type="password"
+                inputmode="numeric"
+                autocomplete="current-password"
+                class="control"
+                required
+                minlength="4"
+                maxlength="12"
+                aria-describedby="presenter-pin-hint"
+                data-error="presenter-pin-error"
+              />
+              <div id="presenter-pin-error" class="error-msg">
+                <span class="error-badge" role="img" aria-label="Error">!</span>
+                <span>Ingresa un PIN válido de 4 a 12 caracteres.</span>
+              </div>
+            </div>
+            <button id="presenter-login-btn" type="submit" class="btn btn--turquoise btn--lg" style="width: 100%">
+              Entrar
+            </button>
+          </form>
+        </section>
+
+        <div id="presenter-stage-section" class="admin-grid" hidden>
+          <div id="presenter-featured-banner" class="banner banner--featured" hidden>
+            <div>
+              <span class="badge badge--solid-crimson" style="margin-bottom: 0.35rem">En pantalla ahora</span>
+              <p id="presenter-featured-text" style="font-weight: 700; font-size: 1.05rem"></p>
+            </div>
+            <button id="presenter-clear-featured-btn" type="button" class="btn btn--ghost btn--sm">
+              Quitar de pantalla
+            </button>
+          </div>
+
+          <div class="banner" style="justify-content: space-between">
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem" role="group" aria-label="Filtrar confesiones">
+              <button type="button" class="tab-btn" data-filter="approved" aria-pressed="true">
+                Por leer
+              </button>
+              <button type="button" class="tab-btn" data-filter="all" aria-pressed="false">
+                Todas
+              </button>
+              <button type="button" class="tab-btn" data-filter="read" aria-pressed="false">
+                Leídas
+              </button>
+            </div>
+            <button id="sort-toggle-btn" type="button" class="btn btn--ghost btn--sm">
+              Orden: Orden de llegada
+            </button>
+          </div>
+
+          <div id="new-items-pill-wrap" hidden style="position: sticky; top: 0.75rem; z-index: 40; display: flex; justify-content: center">
+            <button id="new-items-pill-btn" type="button" class="btn btn--turquoise">
+              Nuevas confesiones disponibles · Actualizar vista
+            </button>
+          </div>
+
+          <div id="presenter-empty" class="empty-state" hidden>
+            <p id="presenter-empty-text">Aún no hay confesiones aprobadas para leer.</p>
+          </div>
+
+          <ul id="presenter-list" class="confession-list"></ul>
+        </div>
+      </main>
+    </div>
+
+    <div role="region" aria-label="Notificaciones" class="toast-region"></div>
+    <script type="module" src="/js/presenters.mjs"></script>
+  </body>
+</html>

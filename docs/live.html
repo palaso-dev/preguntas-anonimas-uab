@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>En Vivo | Confesiones Anónimas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/gala.css" />
+  </head>
+  <body class="live-body">
+    <a href="#live-stage" class="skip-link visually-hidden">Ir al escenario principal</a>
+
+    <div id="snow-layer" class="snow-layer" aria-hidden="true"></div>
+
+    <header class="live-topbar">
+      <div class="brand-lockup">
+        <div class="brand-emblem">
+          <img src="./img/uab-logo.png" alt="Logo UAB" class="brand-logo" />
+        </div>
+        <div>
+          <h1 id="live-event-title" style="font-size: clamp(1.35rem, 2.5vw, 2rem); font-weight: 800">
+            Confesiones Anónimas
+          </h1>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <span id="live-counter-badge" class="badge badge--turquoise">0 confesiones</span>
+      </div>
+    </header>
+
+    <main class="live-main">
+      <div id="live-stage" class="live-stage" tabindex="-1"></div>
+    </main>
+
+    <footer class="live-footer" style="justify-content: flex-end">
+      <div class="nav-links">
+        <button
+          id="toggle-fullscreen"
+          type="button"
+          class="btn btn--ghost btn--sm"
+          aria-label="Pantalla completa"
+          title="Pantalla completa"
+          style="padding: 0.45rem; min-inline-size: 2.5rem"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+          </svg>
+        </button>
+      </div>
+    </footer>
+
+    <script type="module" src="./js/live.mjs"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Código QR Imprimible | Cena de Gala Navideña</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/gala.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link visually-hidden">Ir a la tarjeta QR</a>
+
+    <header class="gala-shell no-print" style="padding-bottom: 0">
+      <div class="banner" style="justify-content: space-between">
+        <div>
+          <strong style="font-size: 1.02rem">Tarjeta QR lista para mesas o proyector</strong>
+          <p class="hint">Puedes imprimirla ahora mismo o descargar el QR en alta resolución.</p>
+        </div>
+        <nav class="nav-links" aria-label="Herramientas de tarjeta QR">
+          <button id="print-qr-btn" type="button" class="btn btn--turquoise btn--sm">
+            Imprimir / Guardar PDF
+          </button>
+          <a class="btn btn--primary btn--sm" href="/api/qr.png" download="qr-cena-gala.png">
+            Descargar PNG
+          </a>
+          <a class="btn btn--ghost btn--sm" href="/api/qr.svg" download="qr-cena-gala.svg">
+            Descargar SVG
+          </a>
+          <a class="btn btn--ghost btn--sm" href="/admin">Ir a moderación</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <article class="qr-print-sheet" aria-labelledby="main-content">
+        <div class="brand-emblem" style="width: 4rem; height: 4rem; padding: 0.35rem">
+          <img src="/img/uab-logo.png" alt="Logo UAB" class="brand-logo" />
+        </div>
+        <div>
+          <h1 id="main-content" class="display-title" tabindex="-1" style="font-size: clamp(2.1rem, 4.5vw, 3.2rem)">
+            Confesiones Anónimas
+          </h1>
+          <p id="qr-subtitle" class="brand-subtitle" style="font-size: 1.15rem; margin-top: 0.4rem" hidden></p>
+        </div>
+
+        <div class="qr-print-frame">
+          <img id="printable-qr-img" src="/api/qr.svg" alt="Código QR para enviar confesiones anónimas" width="320" height="320" />
+        </div>
+
+        <div style="display: grid; gap: 0.5rem; max-width: 34ch">
+          <h2 class="display-title" style="font-size: 1.65rem">¿Tienes una confesión o saludo?</h2>
+          <p class="brand-subtitle">
+            Abre la cámara de tu celular, escanea este código QR y envía tu mensaje anónimo a los
+            presentadores de la gala.
+          </p>
+          <p id="qr-active-url" style="font-size: 0.9rem; font-weight: 700; color: var(--turquoise-300); overflow-wrap: anywhere"></p>
+        </div>
+      </article>
+    </main>
+
+    <script type="module" src="/js/qr.mjs"></script>
+  </body>
+</html>
