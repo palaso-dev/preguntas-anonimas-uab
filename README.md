@@ -1,6 +1,22 @@
-# Confesiones QR — Cena de Gala Navideña
+# Confesiones Anónimas — UAB
 
-Aplicación web local con persistencia en **SQLite**, actualización en tiempo real (**SSE**), panel de moderación, vista de escenario para presentadores, pantalla gigante en vivo, tarjeta QR imprimible y túnel público automático con Cloudflare.
+Aplicación web para recibir confesiones anónimas mediante código QR, moderarlas y mostrarlas en vivo.
+
+## Enlaces en vivo (GitHub Pages + Supabase)
+
+| Vista | URL |
+| :--- | :--- |
+| **Formulario QR (invitados)** | https://palaso-dev.github.io/preguntas-anonimas-uab/ |
+| **Panel de control (moderación)** | https://palaso-dev.github.io/preguntas-anonimas-uab/admin.html |
+| **Pantalla gigante / proyector** | https://palaso-dev.github.io/preguntas-anonimas-uab/live.html |
+| **Presentadores** | https://palaso-dev.github.io/preguntas-anonimas-uab/presentadores.html |
+| **Tarjeta QR imprimible** | https://palaso-dev.github.io/preguntas-anonimas-uab/qr.html |
+
+*(La versión estática está en la carpeta `docs/`. El acceso a `admin.html` y `presentadores.html` usa el usuario creado en Supabase Authentication).*
+
+---
+
+## Modo local alternativo (SQLite + Cloudflare Tunnel)
 
 ## Cómo iniciar la noche de la gala (Recomendado)
 
